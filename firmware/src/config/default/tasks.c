@@ -64,10 +64,17 @@ TaskHandle_t xAPP_Tasks;
 
 void _APP_Tasks(  void *pvParameters  )
 {   
+     TickType_t xLastWakeTime;
+ const TickType_t xFrequency = 10;
+
+     // Initialise the xLastWakeTime variable with the current time.
+     xLastWakeTime = xTaskGetTickCount();
+
     while(1)
     {
+                 vTaskDelayUntil( &xLastWakeTime, xFrequency );
         APP_Tasks();
-        vTaskDelay(500 / portTICK_PERIOD_MS);
+        //vTaskDelay(50 / portTICK_PERIOD_MS);
     }
 }
 

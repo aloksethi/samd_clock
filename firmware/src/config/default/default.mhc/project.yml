@@ -90,13 +90,13 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: 8FDD6248506F28B32C4F5FD9AA0D9C6F
-- generatedChecksum: 6F473F510A84D2C915C87274A9AD965B
+- generatedChecksum: 48C27F38C82C3B4A688DB6B82D5B595C
   logicalPath: config/default/peripheral/clock
   name: plib_clock.c
   physicalPath: peripheral/clock
   security: NON_SECURE
   type: SOURCE
-  userChecksum: 6F473F510A84D2C915C87274A9AD965B
+  userChecksum: 48C27F38C82C3B4A688DB6B82D5B595C
 - generatedChecksum: C3ECDED3D6301DB0DE622293ED615D21
   logicalPath: config/default/peripheral/evsys
   name: plib_evsys.c
@@ -111,27 +111,27 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: D984FDA7A2C6E878F8BFA27EF0A658A6
-- generatedChecksum: 8E76B0609233122F5E1694614CEC13B1
+- generatedChecksum: 7E995437D96BFC48A898396AD635BEE4
   logicalPath: config/default/peripheral/nvmctrl
   name: plib_nvmctrl.c
   physicalPath: peripheral/nvmctrl
   security: NON_SECURE
   type: SOURCE
-  userChecksum: 8E76B0609233122F5E1694614CEC13B1
-- generatedChecksum: 3F03C48033560C52E59FDF1894828C1D
+  userChecksum: 7E995437D96BFC48A898396AD635BEE4
+- generatedChecksum: 19049816398269089586592E89E88AEE
   logicalPath: config/default/peripheral/port
   name: plib_port.c
   physicalPath: peripheral/port
   security: NON_SECURE
   type: SOURCE
-  userChecksum: 3F03C48033560C52E59FDF1894828C1D
+  userChecksum: 19049816398269089586592E89E88AEE
 - generatedChecksum: 7A6AE693B85B31690A0628B9B05AE4C2
   logicalPath: FreeRTOS/Source/portable/GCC/ARM_CM0
   name: port.c
   physicalPath: ../../third_party/rtos/FreeRTOS/Source/portable/GCC/ARM_CM0
   security: NON_SECURE
   type: SOURCE
-  userChecksum: 7A6AE693B85B31690A0628B9B05AE4C2
+  userChecksum: DBA7668DBB773A70BC5F0235F736BF71
 - generatedChecksum: 09041728D74A4E3A32C7D4EAA96C4EE7
   logicalPath: FreeRTOS/Source
   name: queue.c
@@ -166,7 +166,7 @@ files:
   physicalPath: ''
   security: NON_SECURE
   type: SOURCE
-  userChecksum: 8174D2FC0A4231A1935ADCAAD96C8D85
+  userChecksum: 50DC62C947CA0FF9926BD43C1B99B6F0
 - generatedChecksum: F1B86F6E1527FD59A8713B67564F2898
   logicalPath: FreeRTOS/Source
   name: timers.c
@@ -188,13 +188,13 @@ files:
   security: NON_SECURE
   type: HEADER
   userChecksum: AF3A8D8AA610E7DFD3E38DDAC5E42074
-- generatedChecksum: E033C3601E67E7C40FB5646A63378DA8
+- generatedChecksum: 2773EDAF4FD867B736D2BFA58D5D104B
   logicalPath: config/default
   name: FreeRTOSConfig.h
   physicalPath: ''
   security: NON_SECURE
   type: HEADER
-  userChecksum: E033C3601E67E7C40FB5646A63378DA8
+  userChecksum: 2773EDAF4FD867B736D2BFA58D5D104B
 - generatedChecksum: 6DE7A9F0A5973D127B56B9739EBCDE20
   logicalPath: packs/ATSAMD21E17A_DFP/component
   name: ac.h
@@ -321,13 +321,13 @@ files:
   security: NON_SECURE
   type: HEADER
   userChecksum: 2AD9700A41DC94A60C663A17CEDB2703
-- generatedChecksum: B506E0F05C95355FB50C7039F846E19B
+- generatedChecksum: FDAF174C542A121337AF1B6F489516BA
   logicalPath: config/default
   name: definitions.h
   physicalPath: ''
   security: NON_SECURE
   type: HEADER
-  userChecksum: B506E0F05C95355FB50C7039F846E19B
+  userChecksum: FDAF174C542A121337AF1B6F489516BA
 - generatedChecksum: 1EA4EDD5EA90F43EC407DE32441159A9
   logicalPath: FreeRTOS/Source/include
   name: deprecated_definitions.h

@@ -350,11 +350,12 @@ void xPortPendSVHandler( void )
 	);
 }
 /*-----------------------------------------------------------*/
+#include "peripheral/port/plib_port.h"
 
 void xPortSysTickHandler( void )
 {
 uint32_t ulPreviousMask;
-
+(PORT_REGS->GROUP[0].PORT_OUTTGL = ((uint32_t)1U << 7U));
 	ulPreviousMask = portSET_INTERRUPT_MASK_FROM_ISR();
 	{
 		/* Increment the RTOS tick. */

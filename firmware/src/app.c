@@ -92,9 +92,9 @@ void APP_Initialize ( void )
     /* Place the App state machine in its initial state. */
     appData.state = APP_STATE_INIT;
 
-            led1_Toggle();
-            led2_Toggle();
-            led3_Toggle();
+          //  led1_Toggle();
+            //led2_Toggle();
+           // led3_Toggle();
 
     /* TODO: Initialize your application's state machine and other
      * parameters.
@@ -134,7 +134,7 @@ void APP_Tasks ( void )
         {
             led1_Toggle();
             led2_Toggle();
-            led3_Toggle();
+            //led3_Toggle();
             break;
         }
 
