@@ -132,9 +132,9 @@ void APP_Tasks ( void )
 
         case APP_STATE_SERVICE_TASKS:
         {
-            led1_Toggle();
-            led2_Toggle();
-            //led3_Toggle();
+            //led1_Toggle();
+            //led2_Toggle();
+            led3_Toggle();
             break;
         }
 
