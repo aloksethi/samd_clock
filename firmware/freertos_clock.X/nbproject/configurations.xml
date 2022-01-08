@@ -6,6 +6,14 @@
                    projectFiles="true">
       <logicalFolder name="f1" displayName="config" projectFiles="true">
         <logicalFolder name="f1" displayName="default" projectFiles="true">
+          <logicalFolder name="f4" displayName="driver" projectFiles="true">
+            <logicalFolder name="f1" displayName="i2c" projectFiles="true">
+              <itemPath>../src/config/default/driver/i2c/drv_i2c.h</itemPath>
+              <itemPath>../src/config/default/driver/i2c/drv_i2c_definitions.h</itemPath>
+            </logicalFolder>
+            <itemPath>../src/config/default/driver/driver.h</itemPath>
+            <itemPath>../src/config/default/driver/driver_common.h</itemPath>
+          </logicalFolder>
           <logicalFolder name="f3" displayName="osal" projectFiles="true">
             <itemPath>../src/config/default/osal/osal.h</itemPath>
             <itemPath>../src/config/default/osal/osal_definitions.h</itemPath>
@@ -27,8 +35,17 @@
             <logicalFolder name="f3" displayName="port" projectFiles="true">
               <itemPath>../src/config/default/peripheral/port/plib_port.h</itemPath>
             </logicalFolder>
+            <logicalFolder name="f6" displayName="sercom" projectFiles="true">
+              <logicalFolder name="f1" displayName="i2c_master" projectFiles="true">
+                <itemPath>../src/config/default/peripheral/sercom/i2c_master/plib_sercom_i2c_master_common.h</itemPath>
+                <itemPath>../src/config/default/peripheral/sercom/i2c_master/plib_sercom0_i2c_master.h</itemPath>
+              </logicalFolder>
+            </logicalFolder>
           </logicalFolder>
           <logicalFolder name="f2" displayName="system" projectFiles="true">
+            <logicalFolder name="f3" displayName="debug" projectFiles="true">
+              <itemPath>../src/config/default/system/debug/sys_debug.h</itemPath>
+            </logicalFolder>
             <logicalFolder name="f1" displayName="int" projectFiles="true">
               <itemPath>../src/config/default/system/int/sys_int.h</itemPath>
               <itemPath>../src/config/default/system/int/sys_int_mapping.h</itemPath>
@@ -37,6 +54,9 @@
               <itemPath>../src/config/default/system/ports/sys_ports.h</itemPath>
               <itemPath>../src/config/default/system/ports/sys_ports_mapping.h</itemPath>
             </logicalFolder>
+            <itemPath>../src/config/default/system/system.h</itemPath>
+            <itemPath>../src/config/default/system/system_common.h</itemPath>
+            <itemPath>../src/config/default/system/system_module.h</itemPath>
           </logicalFolder>
           <itemPath>../src/config/default/device.h</itemPath>
           <itemPath>../src/config/default/device_cache.h</itemPath>
@@ -183,6 +203,12 @@
                    projectFiles="true">
       <logicalFolder name="f1" displayName="config" projectFiles="true">
         <logicalFolder name="f1" displayName="default" projectFiles="true">
+          <logicalFolder name="f5" displayName="driver" projectFiles="true">
+            <logicalFolder name="f1" displayName="i2c" projectFiles="true">
+              <itemPath>../src/config/default/driver/i2c/src/drv_i2c.c</itemPath>
+              <itemPath>../src/config/default/driver/i2c/src/drv_i2c_local.h</itemPath>
+            </logicalFolder>
+          </logicalFolder>
           <logicalFolder name="f4" displayName="osal" projectFiles="true">
             <itemPath>../src/config/default/osal/osal_freertos.c</itemPath>
           </logicalFolder>
@@ -201,6 +227,11 @@
             </logicalFolder>
             <logicalFolder name="f3" displayName="port" projectFiles="true">
               <itemPath>../src/config/default/peripheral/port/plib_port.c</itemPath>
+            </logicalFolder>
+            <logicalFolder name="f6" displayName="sercom" projectFiles="true">
+              <logicalFolder name="f1" displayName="i2c_master" projectFiles="true">
+                <itemPath>../src/config/default/peripheral/sercom/i2c_master/plib_sercom0_i2c_master.c</itemPath>
+              </logicalFolder>
             </logicalFolder>
           </logicalFolder>
           <logicalFolder name="f2" displayName="stdio" projectFiles="true">
@@ -251,12 +282,14 @@
         <itemPath>../src/config/default/default.mhc/cmsis.yml</itemPath>
         <itemPath>../src/config/default/default.mhc/core.yml</itemPath>
         <itemPath>../src/config/default/default.mhc/dfp.yml</itemPath>
+        <itemPath>../src/config/default/default.mhc/drv_i2c.yml</itemPath>
         <itemPath>../src/config/default/default.mhc/evsys.yml</itemPath>
         <itemPath>../src/config/default/default.mhc/FreeRTOS.yml</itemPath>
         <itemPath>../src/config/default/default.mhc/GraphSettings.yml</itemPath>
         <itemPath>../src/config/default/default.mhc/HarmonyCore.yml</itemPath>
         <itemPath>../src/config/default/default.mhc/nvmctrl.yml</itemPath>
         <itemPath>../src/config/default/default.mhc/project.yml</itemPath>
+        <itemPath>../src/config/default/default.mhc/sercom0.yml</itemPath>
         <itemPath>../src/config/default/default.mhc/settings.yml</itemPath>
       </logicalFolder>
       <itemPath>Makefile</itemPath>
@@ -342,8 +375,6 @@
         <property key="memories.programmemory" value="true"/>
         <property key="memories.programmemory.ranges" value="0x400000-0x5fffff"/>
         <property key="poweroptions.powerenable" value="false"/>
-        <property key="programmerToGoFilePath"
-                  value="C:/Users/g74/Desktop/samd_projects/freertos_clock/firmware/freertos_clock.X/debug/default/freertos_clock_ptg"/>
         <property key="programoptions.eraseb4program" value="false"/>
         <property key="programoptions.preservedataflash" value="false"/>
         <property key="programoptions.preservedataflash.ranges"
@@ -378,8 +409,8 @@
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-micro-compressed-code" value="false"/>
         <property key="isolate-each-function" value="true"/>
-        <property key="make-warnings-into-errors" value="true"/>
-        <property key="optimization-level" value="-O1"/>
+        <property key="make-warnings-into-errors" value="false"/>
+        <property key="optimization-level" value=""/>
         <property key="place-data-into-section" value="true"/>
         <property key="post-instruction-scheduling" value="default"/>
         <property key="pre-instruction-scheduling" value="default"/>
@@ -406,7 +437,7 @@
         <property key="false-conditionals" value="false"/>
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-micro-compressed-code" value="false"/>
-        <property key="keep-locals" value="false"/>
+        <property key="keep-locals" value="true"/>
         <property key="list-assembly" value="false"/>
         <property key="list-source" value="false"/>
         <property key="list-symbols" value="false"/>
@@ -1048,7 +1079,7 @@
         <property key="communication.speed" value="4.000"/>
         <property key="debugoptions.debug-startup" value="Use system settings"/>
         <property key="debugoptions.reset-behaviour" value="Use system settings"/>
-        <property key="debugoptions.useswbreakpoints" value="false"/>
+        <property key="debugoptions.useswbreakpoints" value="true"/>
         <property key="firmware.path"
                   value="Press to browse for a specific firmware version"/>
         <property key="firmware.toolpack"
