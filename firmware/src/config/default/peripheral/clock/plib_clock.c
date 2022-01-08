@@ -77,6 +77,11 @@ void CLOCK_Initialize (void)
     GCLK0_Initialize();
 
 
+    /* Selection of the Generator and write Lock for SERCOM0_CORE */
+    GCLK_REGS->GCLK_CLKCTRL = GCLK_CLKCTRL_ID(20) | GCLK_CLKCTRL_GEN(0x0)  | GCLK_CLKCTRL_CLKEN_Msk;
+
+    /* Configure the APBC Bridge Clocks */
+    PM_REGS->PM_APBCMASK = 0x10004;
 
 
 }

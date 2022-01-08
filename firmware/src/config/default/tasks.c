@@ -61,23 +61,83 @@
 // *****************************************************************************
 /* Handle for the APP_Tasks. */
 TaskHandle_t xAPP_Tasks;
+TaskHandle_t xI2C_Tasks;
 
 void _APP_Tasks(  void *pvParameters  )
 {   
-     TickType_t xLastWakeTime;
- const TickType_t xFrequency = 10;
-
-     // Initialise the xLastWakeTime variable with the current time.
-     xLastWakeTime = xTaskGetTickCount();
 
     while(1)
     {
-                 vTaskDelayUntil( &xLastWakeTime, xFrequency );
         APP_Tasks();
-        //vTaskDelay(50 / portTICK_PERIOD_MS);
+        vTaskDelay(500 / portTICK_PERIOD_MS);
     }
 }
 
+#define APP_SENSOR_I2C_CLOCK_SPEED			   100000
+#define APP_SENSOR_I2C_SLAVE_ADDR			   0x0068
+
+typedef struct
+{
+	bool isInitDone;
+	DRV_HANDLE i2cHandle;
+	DRV_I2C_TRANSFER_SETUP i2cSetup;
+	uint8_t i2cRxBuffer[1];
+} APP_SENSOR_THREAD_DATA;
+
+APP_SENSOR_THREAD_DATA app_sensorData;
+
+
+void I2C_Task(  void *pvParameters  )
+{   
+    bool ret_val;
+    	uint8_t registerAddr = 0;
+
+    app_sensorData.i2cHandle = DRV_I2C_Open( DRV_I2C_INDEX_0, DRV_IO_INTENT_READWRITE );
+    	if (app_sensorData.i2cHandle != DRV_HANDLE_INVALID)
+		{
+			/* Got valid handle, now configure the I2C clock speed for sensor */
+			app_sensorData.i2cSetup.clockSpeed = APP_SENSOR_I2C_CLOCK_SPEED;
+
+			/* Setup I2C transfer @ 100 kHz to interface with Sensor */
+            DRV_I2C_TransferSetup(app_sensorData.i2cHandle, &app_sensorData.i2cSetup);
+			
+		}
+		else
+		{
+			/* Handle error */
+			uint8_t i2c_user_error[] = "I2C sensor Handle Failed\r\n";
+			vTaskSuspend(NULL);
+		}
+    
+    
+    
+    while(1)
+    {
+
+        led2_Clear();
+    #if 1
+        uint8_t control_val = 0;
+        uint8_t status_val = 0; 
+        uint8_t second_val = 0;
+        
+        registerAddr = 0xe;
+        ret_val =  DRV_I2C_WriteReadTransfer(app_sensorData.i2cHandle, APP_SENSOR_I2C_SLAVE_ADDR, (void*)&registerAddr, 1, (void*)app_sensorData.i2cRxBuffer, 1);
+        control_val = app_sensorData.i2cRxBuffer[0];
+        
+                registerAddr = 0xf;
+        ret_val =  DRV_I2C_WriteReadTransfer(app_sensorData.i2cHandle, APP_SENSOR_I2C_SLAVE_ADDR, (void*)&registerAddr, 1, (void*)app_sensorData.i2cRxBuffer, 1);
+        status_val = app_sensorData.i2cRxBuffer[0];
+
+        registerAddr = 0x0;
+        ret_val =  DRV_I2C_WriteReadTransfer(app_sensorData.i2cHandle, APP_SENSOR_I2C_SLAVE_ADDR, (void*)&registerAddr, 1, (void*)app_sensorData.i2cRxBuffer, 1);
+        second_val = app_sensorData.i2cRxBuffer[0];
+
+        if (true == ret_val)
+        led2_Toggle();
+#endif
+        vTaskDelay(500 / portTICK_PERIOD_MS);
+    }
+}
 
 
 
@@ -115,7 +175,12 @@ void SYS_Tasks ( void )
                 &xAPP_Tasks);
 
 
-
+   xTaskCreate((TaskFunction_t) I2C_Task,
+                "i2c_task",
+                512,
+                NULL,
+                2,
+                &xI2C_Tasks);
 
     /* Start RTOS Scheduler. */
     

@@ -92,6 +92,14 @@
 #define led3_Get()               (((PORT_REGS->GROUP[0].PORT_IN >> 7U)) & 0x01U)
 #define led3_PIN                  PORT_PIN_PA07
 
+/*** Macros for sda pin ***/
+#define sda_Get()               (((PORT_REGS->GROUP[0].PORT_IN >> 8U)) & 0x01U)
+#define sda_PIN                  PORT_PIN_PA08
+
+/*** Macros for sck pin ***/
+#define sck_Get()               (((PORT_REGS->GROUP[0].PORT_IN >> 9U)) & 0x01U)
+#define sck_PIN                  PORT_PIN_PA09
+
 // *****************************************************************************
 /* PORT Group
 
