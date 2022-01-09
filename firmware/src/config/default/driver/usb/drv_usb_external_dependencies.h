@@ -1,20 +1,20 @@
 /*******************************************************************************
- System Interrupts File
+  USB stack external dependencies file
 
   Company:
     Microchip Technology Inc.
 
   File Name:
-    interrupt.h
+    drv_usb_external_dependencies.h
 
   Summary:
-    Interrupt vectors mapping
+    USB Driver external dependencies file
 
   Description:
-    This file contains declarations of device vectors used by Harmony 3
- *******************************************************************************/
+    USB Driver external dependencies file. 
+*******************************************************************************/
 
-// DOM-IGNORE-BEGIN
+//DOM-IGNORE-BEGIN
 /*******************************************************************************
 * Copyright (C) 2018 Microchip Technology Inc. and its subsidiaries.
 *
@@ -37,33 +37,32 @@
 * ANY WAY RELATED TO THIS SOFTWARE WILL NOT EXCEED THE AMOUNT OF FEES, IF ANY,
 * THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
  *******************************************************************************/
-// DOM-IGNORE-END
+//DOM-IGNORE-END
 
-#ifndef INTERRUPTS_H
-#define INTERRUPTS_H
+#ifndef _DRV_USB_EXTERNAL_DEPENDENCIES_H
+#define _DRV_USB_EXTERNAL_DEPENDENCIES_H
 
-// *****************************************************************************
-// *****************************************************************************
-// Section: Included Files
-// *****************************************************************************
-// *****************************************************************************
-#include <stdint.h>
+#include <string.h>
+#include "system/system_common.h"
+#include "configuration.h"
+#include "definitions.h"
+#include "system/system_module.h"
 
+#if  !defined(SYS_DEBUG_ENABLE) 
 
+    #if  !defined(SYS_DEBUG_PRINT)
+        #define SYS_DEBUG_PRINT(level, format, ...) 
+    #endif
 
-// *****************************************************************************
-// *****************************************************************************
-// Section: Handler Routines
-// *****************************************************************************
-// *****************************************************************************
+    #if  !defined(SYS_DEBUG_MESSAGE)
+        #define SYS_DEBUG_MESSAGE(a,b, ...)   
+    #endif
 
-void Reset_Handler (void);
-void NonMaskableInt_Handler (void);
-void HardFault_Handler (void);
-void xPortSysTickHandler (void);
-void DRV_USBFSV1_USB_Handler (void);
-void SERCOM0_I2C_InterruptHandler (void);
-
-
-
-#endif // INTERRUPTS_H
+    #if  !defined(SYS_DEBUG)
+        #define SYS_DEBUG(a,b)
+    #endif 
+#endif 
+#endif /* End of #ifndef _DRV_USB_EXTERNAL_DEPENDENCIES_H */ 
+/*******************************************************************************
+ End of File
+*/

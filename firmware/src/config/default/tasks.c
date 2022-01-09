@@ -63,6 +63,27 @@
 TaskHandle_t xAPP_Tasks;
 TaskHandle_t xI2C_Tasks;
 
+void _USB_DEVICE_Tasks(  void *pvParameters  )
+{
+    while(1)
+    {
+				 /* USB Device layer tasks routine */
+        USB_DEVICE_Tasks(sysObj.usbDevObject0);
+                DRV_USBFSV1_Tasks(sysObj.drvUSBFSV1Object);
+
+        vTaskDelay(10 / portTICK_PERIOD_MS);
+    }
+}
+
+//void _DRV_USBFSV1_Tasks(  void *pvParameters  )
+//{
+//    while(1)
+//    {
+//				 /* USB FS Driver Task Routine */
+//        vTaskDelay(10 / portTICK_PERIOD_MS);
+//    }
+//}
+
 void _APP_Tasks(  void *pvParameters  )
 {   
 
@@ -105,7 +126,6 @@ void I2C_Task(  void *pvParameters  )
 		else
 		{
 			/* Handle error */
-			uint8_t i2c_user_error[] = "I2C sensor Handle Failed\r\n";
 			vTaskSuspend(NULL);
 		}
     
@@ -141,6 +161,7 @@ void I2C_Task(  void *pvParameters  )
 
 
 
+
 // *****************************************************************************
 // *****************************************************************************
 // Section: System "Tasks" Routine
@@ -159,29 +180,49 @@ void SYS_Tasks ( void )
     /* Maintain system services */
     
 
-    /* Maintain Device Drivers */
+    /* Create OS Thread for USB_DEVICE_Tasks. */
+    xTaskCreate( _USB_DEVICE_Tasks,
+        "USB_DEVICE_TASKS",
+        896,
+        (void*)NULL,
+        1,
+        (TaskHandle_t*)NULL
+    );
     
-
-    /* Maintain Middleware & Other Libraries */
-    
+	/* Create OS Thread for USB Driver Tasks. */
+//    xTaskCreate( _DRV_USBFSV1_Tasks,
+//        "DRV_USBFSV1_TASKS",
+//        896,
+//        (void*)NULL,
+//        1,
+//        (TaskHandle_t*)NULL
+//    );
+//
+ xTaskCreate( APP_USB_Tasks,
+        "APP_USB_TASKS",
+        896,
+        (void*)NULL,
+        1,
+        (TaskHandle_t*)NULL
+    );
 
     /* Maintain the application's state machine. */
         /* Create OS Thread for APP_Tasks. */
     xTaskCreate((TaskFunction_t) _APP_Tasks,
                 "APP_Tasks",
-                128,
+                64,
                 NULL,
                 1,
                 &xAPP_Tasks);
 
-
-   xTaskCreate((TaskFunction_t) I2C_Task,
-                "i2c_task",
-                512,
-                NULL,
-                2,
-                &xI2C_Tasks);
-
+/*
+    xTaskCreate((TaskFunction_t) I2C_Task,
+            "i2c_task",
+            64,
+            NULL,
+            2,
+            &xI2C_Tasks);
+*/
     /* Start RTOS Scheduler. */
     
      /**********************************************************************

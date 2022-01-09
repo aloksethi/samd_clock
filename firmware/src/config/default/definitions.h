@@ -54,15 +54,20 @@
 #include "peripheral/port/plib_port.h"
 #include "peripheral/clock/plib_clock.h"
 #include "peripheral/nvic/plib_nvic.h"
+#include "usb/usb_chapter_9.h"
+#include "usb/usb_device.h"
+#include "driver/i2c/drv_i2c.h"
+#include "usb/usb_device_cdc.h"
+#include "usb/usb_cdc.h"
+#include "driver/usb/usbfsv1/drv_usbfsv1.h"
 #include "FreeRTOS.h"
 #include "task.h"
 #include "system/int/sys_int.h"
 #include "system/ports/sys_ports.h"
 #include "osal/osal.h"
 #include "system/debug/sys_debug.h"
-#include "driver/i2c/drv_i2c.h"
 #include "app.h"
-
+#include "app_usb.h"
 
 
 // DOM-IGNORE-BEGIN
@@ -74,7 +79,7 @@ extern "C" {
 // DOM-IGNORE-END
 
 /* CPU clock frequency */
-#define CPU_CLOCK_FREQUENCY 1000000
+#define CPU_CLOCK_FREQUENCY 48000000
 
 // *****************************************************************************
 // *****************************************************************************
@@ -189,6 +194,10 @@ typedef struct
     /* I2C0 Driver Object */
     SYS_MODULE_OBJ drvI2C0;
 
+	SYS_MODULE_OBJ  usbDevObject0;
+
+	SYS_MODULE_OBJ  drvUSBFSV1Object;
+
 
 } SYSTEM_OBJECTS;
 
@@ -197,6 +206,8 @@ typedef struct
 // Section: extern declarations
 // *****************************************************************************
 // *****************************************************************************
+
+extern const USB_DEVICE_INIT usbDevInitData; 
 
 
 

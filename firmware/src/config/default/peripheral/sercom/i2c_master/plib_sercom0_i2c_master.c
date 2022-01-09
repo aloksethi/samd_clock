@@ -62,7 +62,7 @@
 #define SERCOM0_I2CM_SPEED_HZ           100000
 
 /* SERCOM0 I2C baud value */
-#define SERCOM0_I2CM_BAUD_VALUE         (0x1U)
+#define SERCOM0_I2CM_BAUD_VALUE         (0xE8U)
 
 
 static SERCOM_I2C_OBJ sercom0I2CObj;

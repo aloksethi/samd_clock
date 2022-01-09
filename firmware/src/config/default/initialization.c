@@ -142,6 +142,38 @@ SYSTEM_OBJECTS sysObj;
 // Section: Library/Stack Initialization Data
 // *****************************************************************************
 // *****************************************************************************
+/******************************************************
+ * USB Driver Initialization
+ ******************************************************/
+
+
+
+const DRV_USBFSV1_INIT drvUSBInit =
+{
+    /* Interrupt Source for USB module */ 
+    .interruptSource = USB_IRQn,
+
+    /* System module initialization */
+    .moduleInit = {0},
+
+    /* USB Controller to operate as USB Device */
+    .operationMode = DRV_USBFSV1_OPMODE_DEVICE,
+
+    /* USB Full Speed Operation */
+	.operationSpeed = USB_SPEED_FULL,
+    
+    /* Stop in idle */
+    .runInStandby = true,
+
+    /* Suspend in sleep */
+    .suspendInSleep = false,
+
+    /* Identifies peripheral (PLIB-level) ID */
+    .usbID = USB_REGS,
+	
+};
+
+
 
 
 // *****************************************************************************
@@ -191,8 +223,17 @@ void SYS_Initialize ( void* data )
 
 
     /* Initialize I2C0 Driver Instance */
-    sysObj.drvI2C0 = DRV_I2C_Initialize(DRV_I2C_INDEX_0, (SYS_MODULE_INIT *)&drvI2C0InitData);
+//    sysObj.drvI2C0 = DRV_I2C_Initialize(DRV_I2C_INDEX_0, (SYS_MODULE_INIT *)&drvI2C0InitData);
 
+
+
+	 /* Initialize the USB device layer */
+    sysObj.usbDevObject0 = USB_DEVICE_Initialize (USB_DEVICE_INDEX_0 , ( SYS_MODULE_INIT* ) & usbDevInitData);
+	
+	
+
+	/* Initialize USB Driver */ 
+    sysObj.drvUSBFSV1Object = DRV_USBFSV1_Initialize(DRV_USBFSV1_INDEX_0, (SYS_MODULE_INIT *) &drvUSBInit);	
 
 
     APP_Initialize();
