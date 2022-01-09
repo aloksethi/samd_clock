@@ -427,14 +427,13 @@ void APP_USB_Tasks(void *pvParameters) {
             
             case APP_USB_STATE_SCHEDULE_READ:
             {
-                uint8_t lcl = 'A\n';
-                app_usbData.numBytesWrite = 2;
-                app_usbData.cdcWriteBuffer = &lcl;
-                
-                USB_DEVICE_CDC_Write(USB_DEVICE_CDC_INDEX_0,
+                uint8_t lcl[] = "A\r\n";
+//                app_usbData.numBytesWrite = 3;
+//                app_usbData.cdcWriteBuffer = lcl;
+//                 
+               USB_DEVICE_CDC_Write(USB_DEVICE_CDC_INDEX_0,
                         &app_usbData.writeTransferHandle,
-                        app_usbData.cdcWriteBuffer,
-                        app_usbData.numBytesWrite,
+                        (void *)lcl, 3,
                         USB_DEVICE_CDC_TRANSFER_FLAGS_DATA_COMPLETE);
                 break;
             }
