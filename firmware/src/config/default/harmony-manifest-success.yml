@@ -4,7 +4,7 @@
 
 
 project: freertos_clock
-creation_date: 2022-01-07T00:09:30.498+02:00[Europe/Helsinki]    # ISO 8601 format: https://www.w3.org/TR/NOTE-datetime
+creation_date: 2022-01-08T22:10:27.622+02:00[Europe/Helsinki]    # ISO 8601 format: https://www.w3.org/TR/NOTE-datetime
 operating_system: Windows 10
 mhc_mode: IDE            # [IDE|Standalone|Headless]
 mhc_version: v3.8.2
@@ -16,5 +16,6 @@ modules:
     - {name: "csp", version: "v3.10.0"}
     - {name: "core", version: "v3.10.0"}
     - {name: "dev_packs", version: "v3.10.0"}
+    - {name: "usb", version: "v3.8.1"}
     - {name: "CMSIS-FreeRTOS", version: "v10.3.1"}
 
